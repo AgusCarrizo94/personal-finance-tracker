@@ -19,26 +19,26 @@ import { Doughnut } from "react-chartjs-2";
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 export default function Home() {
-  
   // useState Hooks
   const [showAddIncomeModal, setShowAddIncomeModal] = useState(false);
   const [showAddExpensesModal, setShowAddExpensesModal] = useState(false);
   const [balance, setBalance] = useState(0);
-  
+
   // useContext Hooks
   const { expenses, income } = useContext(financeContext);
-  
+
   // useEffect Hooks
   useEffect(() => {
-    const newBalance = income.reduce((total, i) => {
-      return total + i.amount;
-    }, 0) -
-    expenses.reduce((total, e) => {
-      return total + e.total;
-    }, 0)
+    const newBalance =
+      income.reduce((total, i) => {
+        return total + i.amount;
+      }, 0) -
+      expenses.reduce((total, e) => {
+        return total + e.total;
+      }, 0);
 
     setBalance(newBalance);
-  }, [expenses, income])
+  }, [expenses, income]);
 
   return (
     <>
@@ -64,9 +64,12 @@ export default function Home() {
 
         {/* Expense and Income Buttons */}
         <section className="flex items-center gap-2 py-3">
-          <button onClick={() => {
-            setShowAddExpensesModal(true);
-          }} className="btn btn-primary">
+          <button
+            onClick={() => {
+              setShowAddExpensesModal(true);
+            }}
+            className="btn btn-primary"
+          >
             + Expenses
           </button>
           <button
